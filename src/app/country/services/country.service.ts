@@ -41,7 +41,7 @@ export class CountryService {
     );
   };
 
-  searchCountryByCode(code: string): Observable<Country[]>{
+  searchCountryByCode(code: string){
     const url =`${API_URL}/alpha/${code}`
     return this.http.get<RestCountry[]>(url).pipe(
       map(resp => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
