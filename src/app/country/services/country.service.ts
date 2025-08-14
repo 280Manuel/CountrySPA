@@ -45,7 +45,7 @@ export class CountryService {
     const url =`${API_URL}/alpha/${code}`
     return this.http.get<RestCountry[]>(url).pipe(
       map(resp => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
-      map (countries => countries[0]),
+      map (countries => countries.at(0)),
       catchError(error =>{
         console.log('Error Fetching,', error);
       return throwError(() => new Error( `No se pudo obtener la imformacion de: ${code}`))
