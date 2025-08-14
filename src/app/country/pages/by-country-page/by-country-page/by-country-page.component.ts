@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { CountryService } from './../../../services/country.service';
+import { Component, inject, resource, signal } from '@angular/core';
 import { SearchInputComponent } from "../../../../shared/components/search-input/search-input.component";
 import { CountryListComponent } from "../../../components/country-list/country-list.component";
+import { of } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'by-country-page',
@@ -8,7 +11,16 @@ import { CountryListComponent } from "../../../components/country-list/country-l
   templateUrl: './by-country-page.component.html',
 })
 export class ByCountryPageComponent {
-countries(): import("../../../interfaces/rest-countries.interface").RestCountry[] {
-throw new Error('Method not implemented.');
+  countryService = inject (CountryService)
+
+  query= signal('');
+  countryResource= rxResource({
+    request: () =>({query: this.query()}),
+    loader: ({request}) => {
+      if(!request.query) return of([]);
+      return this.countryService.searchByCountry(request.query)
+     }
+  })
+
 }
-}
+

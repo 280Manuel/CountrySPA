@@ -1,1 +1,10 @@
-<p>country-page works!</p>,
+@if (countryResource.error()) {
+  <section class="flex flex-col items-center justify-center mt-10">
+    <h1>No se encontro el pais</h1>
+    <a class="link-primary cursor-pointer " href="">Regresar</a>
+  </section>
+}
+
+@if (countryResource.hasValue()) {
+  <h3>Nombre: {{countryResource.value()}}</h3>
+}

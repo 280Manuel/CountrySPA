@@ -12,7 +12,7 @@ export class CountryMapper {
       cca2:restCoutry.cca2,
       flag:restCoutry.flag,
       flagSVG:restCoutry.flags.svg,
-      name:restCoutry.name.common,
+      name:restCoutry.translations['spa'].official ?? 'No spanish name.',
       capital: restCoutry.capital.join(', '),
       population: restCoutry.population
     };

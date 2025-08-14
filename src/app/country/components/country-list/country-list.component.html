@@ -21,11 +21,44 @@
             ></td>
             <td>{{country.name}}</td>
             <td>{{country.capital}}</td>
-            <td>{{country.population}}</td>
-            <a class="link-primary cursor-pointer">Mas Informacion</a>
+            <td>
+              <span class="badge badge-secondary">
+                {{country.population |number}}
+              </span>
+            </td>
+            <a
+            [routerLink]="['/country/by', country.cca2]"
+            class="link-primary cursor-pointer">Mas Informacion</a>
         </tr>
       }
       <tr></tr>
+
+      @if (errorMessage()) {
+
+        <tr colspan="8" class="text-center">
+          <td>
+            {{errorMessage()}}
+          </td>
+        </tr>
+      }
+      <!--  -->
+      @if(countries().length=== 0 && !isLoading()) {
+        <tr colspan="8" class="text-center">
+          <td>
+            No se encontraron resultados
+          </td>
+        </tr>
+      }
+      <!--  -->
+      @if (isLoading()) {
+
+        <tr colspan="8" class="text-center">
+          <td>
+          Buscando paises...
+          </td>
+        </tr>
+
+      }
     </tbody>
   </table>
 </section>
